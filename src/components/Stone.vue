@@ -1,5 +1,5 @@
 <template>
-	<div class="stone" @click="cp" :class="{'not-use-board-class':(stone==9)}">
+	<div class="stone" @click="cp" :class="stoneClass">
 		<slot></slot>
 	</div>
 </template>
@@ -14,9 +14,15 @@
 		},
 		data() {
 			return {
+				stoneClass:(this.stone==1)?"stone-black":(this.stone==2)?"stone-white":"",
 				positionX: this.xPosition,
 				positionY: this.yPosition,
 			};
+		},
+		watch:{
+			stone:function(){
+				this.stoneClass=(this.stone==1)?"stone-black":(this.stone==2)?"stone-white":""
+			}
 		},
 		methods: {
 			cp() {
@@ -33,8 +39,11 @@
 		height: 100%;
 		background: greenyellow;
 
-		&.not-use-board-class {
+		&.stone-black {
 			background: black;
+		}
+		&.stone-white {
+			background: white;
 		}
 
 		slot{

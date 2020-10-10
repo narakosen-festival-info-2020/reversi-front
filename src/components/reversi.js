@@ -36,7 +36,7 @@ export default class Reversi {
 		]
 	}
 
-	get getBoard(){
+	get getBoard() {
 		return this.board
 	}
 
@@ -49,8 +49,7 @@ export default class Reversi {
 		return this.board
 	}
 
-	putStone(y, x, state, i) {
-		const playerState = state + 1
+	putStone(x, y, playerState, i) {
 		this.board[y][x] = playerState //put
 		let moveX = x + this.movingCollection[i].x
 		let moveY = y + this.movingCollection[i].y
@@ -63,34 +62,33 @@ export default class Reversi {
 		}
 	}
 
-	canPutStone(y, x, state) {
+	canPutStone(x, y, state) {
+		const playerState = state + 1
+		const enemyState = (playerState == 1) ? 2 : 1
 		let returnFlag = false;
 		if (this.board[y][x] == 0) {
 			for (let i = 0; i < this.movingCollection.length; i++) {
-				const cpssFlag = this.canPutStoneSearch(x, y, state, i)
+				const cpssFlag = this.canPutStoneSearch(x, y, playerState, enemyState, i)
 				if (cpssFlag) {
-					returnFlag=true
-					this.putStone(y, x, state, i)
+					returnFlag = true
+					this.putStone(x, y, playerState, i)
 				}
 			}
 		}
 		return returnFlag
 	}
 
-	canPutStoneSearch(x, y, state, i) {
-		let moveX = x + this.movingCollection[i].x
-		let moveY = y + this.movingCollection[i].y
-		const playerState = state + 1
-		const enemyState = (playerState == 1) ? 2 : 1
+	canPutStoneSearch(xp, yp, playerState, enemyState, i) {
+		let moveX = xp + this.movingCollection[i].x
+		let moveY = yp + this.movingCollection[i].y
 		let flag = false
 		let returnFlag = false;
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
-			if (moveX < 0 || moveX == this.board.length || moveY < 0 || moveY == this.board.length || this.board[moveY][moveX] == 9) {
+			if (moveX < 0 || moveX == this.board.length || moveY < 0 || moveY == this.board.length || this.board[moveY][moveX] == 9 || this.board[moveY][moveX] == 0) {
 				break
 			}
 			if (this.board[moveY][moveX] == playerState) {
-				console.log(this.board[moveY][moveX],enemyState,flag)
 				if (flag) returnFlag = true
 				break
 			}
@@ -99,6 +97,37 @@ export default class Reversi {
 			}
 			moveX += this.movingCollection[i].x
 			moveY += this.movingCollection[i].y
+		}
+
+		return returnFlag
+	}
+
+	finishSerch(state) {
+		const playerState = state + 1
+		const enemyState = (playerState == 1) ? 2 : 1
+		let bwFlag = [false, false];
+		let returnFlag = 0; //0 end, 1 continue ,2 skip
+		for (let y = 0; y < this.board.length; y++) {
+			for (let x = 0; x < this.board.length; x++) {
+				for (let i = 0; i < this.movingCollection.length; i++) {
+					if (this.board[y][x] == 0) {
+						if (this.canPutStoneSearch(x, y, playerState, enemyState, i)) {
+							bwFlag[playerState - 1] = true
+						}
+						if (this.canPutStoneSearch(x, y, enemyState, playerState, i)) {
+							bwFlag[enemyState - 1] = true
+						}
+					}
+				}
+			}
+		}
+
+		if (!bwFlag[enemyState - 1]) {
+			if (bwFlag[playerState - 1]) {
+				returnFlag = 2
+			}
+		} else {
+			returnFlag = 1
 		}
 
 		return returnFlag
