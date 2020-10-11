@@ -87,6 +87,8 @@
             self.boardData = res.data.board
             this.reversi = new Reversi(self.boardData)
           })
+        }).catch(e=>{
+          console.log(e)
         })
       this.stateFunc()
     },
