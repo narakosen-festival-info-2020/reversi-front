@@ -65,7 +65,7 @@ export default class Reversi {
 	canPutStone(x, y, state) {
 		const playerState = state + 1
 		const enemyState = (playerState == 1) ? 2 : 1
-		let returnFlag = false;
+		let returnFlag = false
 		if (this.board[y][x] == 0) {
 			for (let i = 0; i < this.movingCollection.length; i++) {
 				const cpssFlag = this.canPutStoneSearch(x, y, playerState, enemyState, i)
@@ -82,7 +82,7 @@ export default class Reversi {
 		let moveX = xp + this.movingCollection[i].x
 		let moveY = yp + this.movingCollection[i].y
 		let flag = false
-		let returnFlag = false;
+		let returnFlag = false
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
 			if (moveX < 0 || moveX == this.board.length || moveY < 0 || moveY == this.board.length || this.board[moveY][moveX] == 9 || this.board[moveY][moveX] == 0) {
@@ -102,11 +102,12 @@ export default class Reversi {
 		return returnFlag
 	}
 
-	finishSerch(state) {
+	finishSerch(state, board) {
+		this.board = board
 		const playerState = state + 1
 		const enemyState = (playerState == 1) ? 2 : 1
-		let bwFlag = [false, false];
-		let returnFlag = 0; //0 end, 1 continue ,2 skip
+		let bwFlag = [false, false]
+		let returnFlag = 0 //0 end, 1 continue ,2 skip
 		for (let y = 0; y < this.board.length; y++) {
 			for (let x = 0; x < this.board.length; x++) {
 				for (let i = 0; i < this.movingCollection.length; i++) {

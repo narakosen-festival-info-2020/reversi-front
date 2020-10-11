@@ -27,26 +27,39 @@
         canSet: [],
         boardData: [],
         stateFlag: 0, //black 0, white 1, end 2
-        returnStatus: "",
+        returnStatus: "黒の番です",
         errorText: "",
-      };
+        header: "",
+        putFlag: true,
+      }
     },
     watch: {
       stateFlag: function () {
+        switch (this.stateFlag) {
+          case 0:
+            this.returnStatus = "黒の番です"
+            break
+          case 1:
+            this.returnStatus = "白の番です"
+            break
+          case 2:
+            this.returnStatus = "終わりです"
+            break
+        }
         if (this.stateFlag == 2) {
-          let blackNum = 0;
-          let whiteNum = 0;
+          let blackNum = 0
+          let whiteNum = 0
           for (let i in this.boardData) {
             for (let l in this.boardData) {
               if (this.boardData[i][l] == 1) {
-                blackNum++;
+                blackNum++
               }
               if (this.boardData[i][l] == 2) {
-                whiteNum++;
+                whiteNum++
               }
             }
           }
-          let endText;
+          let endText
           if (blackNum == whiteNum) {
             endText = "あいこ"
           } else if (blackNum > whiteNum) {
@@ -56,7 +69,7 @@
           }
           this.errorText = `黒は${blackNum}個、白は${whiteNum}個で${endText}です`
         }
-      }
+      },
     },
     computed: {
       // createboard() {
@@ -79,56 +92,76 @@
             "board_type": "normal"
           })
         .then(response => {
+          this.header = response.data.specific_code
           axios.get('/api/reversi/state', {
             headers: {
-              Authorization: `Bearer ${response.data.specific_code}`,
+              Authorization: `Bearer ${this.header}`,
             }
           }).then(res => {
             self.boardData = res.data.board
             this.reversi = new Reversi(self.boardData)
           })
-        }).catch(e=>{
+        }).catch(e => {
           console.log(e)
         })
-      this.stateFunc()
+      // this.stateFunc()
     },
     methods: {
-      clickPixel(x, y) {
-        if (this.stateFlag != 2) {
+      async clickPixel(x, y) {
+        if (this.stateFlag != 2 && this.putFlag) {
+          this.putFlag = false
           this.errorText = ""
           if (this.reversi.canPutStone(x, y, this.stateFlag)) {
-            this.boardData = this.reversi.getBoard
-            const f = this.reversi.finishSerch(this.stateFlag)
+            await axios.post(
+                "/api/reversi/state/action", {
+                  "x": x,
+                  "y": y
+                }, {
+                  headers: {
+                    Authorization: `Bearer ${this.header}`,
+                  }
+                })
+              .then(() => {
+                console.log("put stone")
+              }).catch(e => {
+                console.log(e)
+              })
+            const f = this.reversi.finishSerch(this.stateFlag, this.boardData)
             switch (f) {
               case 0:
                 this.stateFlag = 2
                 break
               case 1:
                 this.stateFlag = (this.stateFlag) ? 0 : 1
+                await this.enemyPutStone()
+                while (this.reversi.finishSerch(this.stateFlag, this.boardData) == 2) {
+                  this.errorText = "黒のパスです"
+                  await this.enemyPutStone()
+                }
+                this.stateFlag = (this.stateFlag) ? 0 : 1
                 break
               case 2:
-                this.errorText = "パスです"
+                this.errorText = "白のパスです"
                 break
             }
           } else {
             this.errorText = "おけないよ"
           }
-          this.stateFunc()
+          this.putFlag = true
         }
       },
-      stateFunc() {
-        switch (this.stateFlag) {
-          case 0:
-            this.returnStatus = "黒の番です"
-            break
-          case 1:
-            this.returnStatus = "白の番です"
-            break
-          case 2:
-            this.returnStatus = "終わりです"
-            break
-        }
-      },
+      async enemyPutStone() {
+        await new Promise(resolve => setTimeout(resolve, 2500))
+        await axios.get('/api/reversi/state', {
+          headers: {
+            Authorization: `Bearer ${this.header}`,
+          }
+        }).then(res => {
+          this.boardData = res.data.board
+        }).catch(e => {
+          console.log(e)
+        })
+      }
     },
   }
 </script>
