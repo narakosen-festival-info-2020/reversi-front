@@ -82,6 +82,6 @@ module.exports = {
         })
     }
   },
-  configureWebpack: config => {}
+  // configureWebpack: config => {}
 
 }

@@ -1,7 +1,8 @@
 <template>
   <div class="main">
-    <div>{{returnStatus}}</div>
-    <div>{{errorText}}</div>
+    <div class="status-text">
+      <div class="text">{{statusText}}</div>
+    </div>
     <table border="1">
       <tr v-for="(stateA,y) of boardData" :key="y">
         <td v-for="(stateB,x) of stateA" :key="x*y">
@@ -9,6 +10,9 @@
         </td>
       </tr>
     </table>
+    <div class="info-text">
+      <div class="text">{{infoText}}</div>
+    </div>
   </div>
 </template>
 
@@ -27,8 +31,8 @@
         canSet: [],
         boardData: [],
         stateFlag: 0, //black 0, white 1, end 2
-        returnStatus: "黒の番です",
-        errorText: "",
+        statusText: "プレイヤー(黒)の番です",
+        infoText: "",
         header: "",
         putFlag: true,
       }
@@ -37,13 +41,13 @@
       stateFlag: function () {
         switch (this.stateFlag) {
           case 0:
-            this.returnStatus = "黒の番です"
+            this.statusText = "プレイヤー(黒)の番です"
             break
           case 1:
-            this.returnStatus = "白の番です"
+            this.statusText = "AI(白)の番です"
             break
           case 2:
-            this.returnStatus = "終わりです"
+            this.statusText = "終わりです"
             break
         }
         if (this.stateFlag == 2) {
@@ -63,11 +67,11 @@
           if (blackNum == whiteNum) {
             endText = "あいこ"
           } else if (blackNum > whiteNum) {
-            endText = "黒の勝ち"
+            endText = "プレイヤー(黒)の勝ち"
           } else {
-            endText = "白の勝ち"
+            endText = "AI(白)の勝ち"
           }
-          this.errorText = `黒は${blackNum}個、白は${whiteNum}個で${endText}です`
+          this.infoText = `プレイヤー(黒)は${blackNum}個、AI(白)は${whiteNum}個で${endText}です`
         }
       },
     },
@@ -110,7 +114,7 @@
       async clickPixel(x, y) {
         if (this.stateFlag != 2 && this.putFlag) {
           this.putFlag = false
-          this.errorText = ""
+          this.infoText = ""
           if (this.reversi.canPutStone(x, y, this.stateFlag)) {
             await axios.post(
                 "/api/reversi/state/action", {
@@ -135,17 +139,17 @@
                 this.stateFlag = (this.stateFlag) ? 0 : 1
                 await this.enemyPutStone()
                 while (this.reversi.finishSerch(this.stateFlag, this.boardData) == 2) {
-                  this.errorText = "黒のパスです"
+                  this.infoText = "プレイヤー(黒)のパスです"
                   await this.enemyPutStone()
                 }
                 this.stateFlag = (this.stateFlag) ? 0 : 1
                 break
               case 2:
-                this.errorText = "白のパスです"
+                this.infoText = "AI(白)のパスです"
                 break
             }
           } else {
-            this.errorText = "おけないよ"
+            this.infoText = "そこには置けません"
           }
           this.putFlag = true
         }
@@ -168,10 +172,60 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
+  @import './css/global.scss';
+
+  $tablehw:min(80vw, 60vh);
+  $tablehw-tab:min(80vw, 60vh);
+  $tablehw-sp:min(90vw, 70vh);
+
+  %center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+
+    &.text {
+      display: block;
+    }
+  }
+
   .main {
     height: 80vh;
     background-color: lightcoral;
     position: relative;
+  }
+
+  .status-text {
+    @extend %center-text;
+    text-align: center;
+    background-color: red;
+    height: calc((100vh - 20vh - #{$tablehw})/2);
+
+    @include tab {
+      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
+    }
+
+    @include sp {
+      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
+    }
+  }
+
+  .info-text {
+    @extend %center-text;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    background-color: red;
+    height: calc((100vh - 20vh - #{$tablehw})/2);
+    width: 100%;
+
+    @include tab {
+      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
+    }
+
+    @include sp {
+      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
+    }
   }
 
   table {
@@ -180,10 +234,20 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     background: black;
+    width: $tablehw;
+    height: $tablehw;
+
+    @include tab {
+      width: $tablehw-tab;
+      height: $tablehw-tab;
+    }
+
+    @include sp {
+      width: $tablehw-sp;
+      height: $tablehw-sp;
+    }
 
     td {
-      width: 50px;
-      height: 50px;
       color: red;
     }
   }
