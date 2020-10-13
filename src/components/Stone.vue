@@ -1,6 +1,6 @@
 <template>
-	<div class="stone" @click="cp" :class="stoneClass">
-		<slot></slot>
+	<div class="stone" @click="cp">
+		<div :class="stoneClass"></div>
 	</div>
 </template>
 
@@ -14,14 +14,14 @@
 		},
 		data() {
 			return {
-				stoneClass:(this.stone==1)?"stone-black":(this.stone==2)?"stone-white":"",
+				stoneClass: (this.stone == 1) ? "stone-black" : (this.stone == 2) ? "stone-white" : "",
 				positionX: this.xPosition,
 				positionY: this.yPosition,
 			};
 		},
-		watch:{
-			stone:function(){
-				this.stoneClass=(this.stone==1)?"stone-black":(this.stone==2)?"stone-white":""
+		watch: {
+			stone: function () {
+				this.stoneClass = (this.stone == 1) ? "stone-black" : (this.stone == 2) ? "stone-white" : ""
 			}
 		},
 		methods: {
@@ -37,16 +37,26 @@
 	.stone {
 		width: 100%;
 		height: 100%;
-		background: greenyellow;
+		background: rgb(38, 133, 1);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-		&.stone-black {
-			background: black;
-		}
-		&.stone-white {
-			background: white;
+		& .stone-black {
+			width: 80%;
+			height: 80%;
+			border-radius: 50%;
+			background: #000;
 		}
 
-		slot{
+		& .stone-white {
+			width: 80%;
+			height: 80%;
+			border-radius: 50%;
+			background: #fff;
+		}
+
+		slot {
 			text-align: center;
 		}
 	}

@@ -3,7 +3,7 @@
     <div class="status-text">
       <div class="text">{{statusText}}</div>
     </div>
-    <table border="1">
+    <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
         <td v-for="(stateB,x) of stateA" :key="x*y">
           <Stone :xPosition=x :yPosition=y :stone=boardData[y][x] @cp="clickPixel" />
@@ -143,6 +143,9 @@
                   await this.enemyPutStone()
                 }
                 this.stateFlag = (this.stateFlag) ? 0 : 1
+                if (this.reversi.finishSerch(this.stateFlag, this.boardData) == 0) {
+                  this.stateFlag = 2
+                }
                 break
               case 2:
                 this.infoText = "AI(白)のパスです"
@@ -155,7 +158,7 @@
         }
       },
       async enemyPutStone() {
-        await new Promise(resolve => setTimeout(resolve, 2500))
+        await new Promise(resolve => setTimeout(resolve, 2100))
         await axios.get('/api/reversi/state', {
           headers: {
             Authorization: `Bearer ${this.header}`,
@@ -191,14 +194,14 @@
 
   .main {
     height: 80vh;
-    background-color: lightcoral;
+    background-color: rgb(189, 126, 55);
     position: relative;
   }
 
   .status-text {
     @extend %center-text;
     text-align: center;
-    background-color: red;
+    background-color: rgb(189, 126, 55);
     height: calc((100vh - 20vh - #{$tablehw})/2);
 
     @include tab {
@@ -215,7 +218,7 @@
     position: absolute;
     text-align: center;
     bottom: 0;
-    background-color: red;
+    background-color: rgb(189, 126, 55);
     height: calc((100vh - 20vh - #{$tablehw})/2);
     width: 100%;
 
@@ -234,6 +237,7 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     background: black;
+    border: 1px solid black;
     width: $tablehw;
     height: $tablehw;
 
@@ -245,10 +249,6 @@
     @include sp {
       width: $tablehw-sp;
       height: $tablehw-sp;
-    }
-
-    td {
-      color: red;
     }
   }
 </style>
