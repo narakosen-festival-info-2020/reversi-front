@@ -119,27 +119,16 @@ export default {
         this.putFlag = false
         this.infoText = ''
         if (this.reversi.canPutStone(x, y, this.stateFlag)) {
-          await this.$axios.$post(
-            '/api/reversi/state/action', {
-              x,
-              y
-            }, {
-              headers: {
-                Authorization: `Bearer ${this.header}`
-              }
-            })
-            .then(() => {
-              console.log('put stone')
-            }).catch((e) => {
-              console.log(e)
-            })
+          this.boardData = [...this.reversi.getBoard]
           const f = this.reversi.finishSerch(this.stateFlag, this.boardData)
           switch (f) {
             case 0:
               this.stateFlag = 2
+              await this.playerPutStone(x, y)
               break
             case 1:
               this.stateFlag = (this.stateFlag) ? 0 : 1
+              await this.playerPutStone(x, y)
               await this.enemyPutStone()
               while (this.reversi.finishSerch(this.stateFlag, this.boardData) === 2) {
                 this.infoText = 'プレイヤー(黒)のパスです'
@@ -151,6 +140,7 @@ export default {
               }
               break
             case 2:
+              await this.playerPutStone(x, y)
               this.infoText = 'AI(白)のパスです'
               break
           }
@@ -161,16 +151,33 @@ export default {
       }
     },
     async enemyPutStone () {
-      await new Promise(resolve => setTimeout(resolve, 2100))
+      await new Promise(resolve => setTimeout(resolve, 2001))
       await this.$axios.$get('/api/reversi/state', {
         headers: {
           Authorization: `Bearer ${this.header}`
         }
       }).then((res) => {
         this.boardData = res.board
+        this.infoText = ''
       }).catch((e) => {
         console.log(e)
       })
+    },
+    async playerPutStone (x, y) {
+      await this.$axios.$post(
+        '/api/reversi/state/action', {
+          x,
+          y
+        }, {
+          headers: {
+            Authorization: `Bearer ${this.header}`
+          }
+        })
+        .then(() => {
+          console.log('put stone')
+        }).catch((e) => {
+          console.log(e)
+        })
     }
   }
 }
