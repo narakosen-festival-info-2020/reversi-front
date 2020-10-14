@@ -1,48 +1,30 @@
 {
   "name": "reversi-front",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "yarn lint:js"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/proxy": "^2.0.1",
     "core-js": "^3.6.5",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "npm-check-updates": "^9.0.4",
-    "sass": "^1.27.0",
-    "vue": "^3.0.0"
+    "install": "^0.13.0",
+    "node-sass": "^4.14.1",
+    "npm": "^6.14.8",
+    "nuxt": "^2.14.6",
+    "sass-loader": "^10.0.3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.7",
-    "@vue/cli-plugin-eslint": "~4.5.7",
-    "@vue/cli-service": "~4.5.7",
-    "@vue/compiler-sfc": "^3.0.0",
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.11.0",
-    "eslint-plugin-vue": "^7.0.1",
-    "sass-loader": "^10.0.3",
-    "vue-loader-v16": "^16.0.0-beta.5.4"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "eslint": "^7.10.0",
+    "eslint-plugin-nuxt": "^1.0.0"
+  }
 }
