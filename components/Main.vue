@@ -1,8 +1,6 @@
 <template>
   <div class="main">
-    <StatusText>
-      {{ statusText }}
-    </StatusText>
+    <StatusText :status="stateFlag" />
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
         <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`">
@@ -26,39 +24,13 @@ export default {
       canSet: [],
       boardData: [],
       stateFlag: 0, // black 0, white 1, end 2
-      statusText: 'プレイヤー(黒)の番です',
       infoText: '',
       header: '',
       putFlag: true
     }
   },
-  computed: {
-    // createboard () {
-    //   return this.boardData
-    // },
-    stone: () => {
-      return function (y, x) {
-        if (this.boardData[y][x] === 1) {
-          return '●'
-        } else if (this.boardData[y][x] === 2) {
-          return '○'
-        }
-      }
-    }
-  },
   watch: {
-    stateFlag  () {
-      switch (this.stateFlag) {
-        case 0:
-          this.statusText = 'プレイヤー(黒)の番です'
-          break
-        case 1:
-          this.statusText = 'AI(白)の番です'
-          break
-        case 2:
-          this.statusText = '終わりです'
-          break
-      }
+    stateFlag () {
       if (this.stateFlag === 2) {
         let blackNum = 0
         let whiteNum = 0
@@ -84,7 +56,7 @@ export default {
       }
     }
   },
-  mounted  () {
+  mounted () {
     const self = this
     this.$axios.$post(
       '/api/generate', {

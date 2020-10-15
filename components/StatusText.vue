@@ -1,14 +1,47 @@
 <template>
   <div class="status-text">
     <div class="text">
-      <slot />
+      {{ statusText }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  props: {
+    status: {
+      type: Number,
+      default: 0
+    }
+  },
+  data () {
+    return {
+      statusText: ''
+    }
+  },
+  watch: {
+    status () {
+      this.changeText()
+    }
+  },
+  mounted () {
+    this.changeText()
+  },
+  methods: {
+    changeText () {
+      switch (this.status) {
+        case 0:
+          this.statusText = 'プレイヤー(黒)の番です'
+          break
+        case 1:
+          this.statusText = 'AI(白)の番です'
+          break
+        case 2:
+          this.statusText = '終わりです'
+          break
+      }
+    }
+  }
 }
 
 </script>
