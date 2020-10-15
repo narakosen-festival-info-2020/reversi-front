@@ -32,8 +32,4 @@ export default { }
     transform: translateY(-50%) translateX(-50%);
   }
 
-  .copyright {
-    /* font-size: 10px; */
-  }
-
 </style>

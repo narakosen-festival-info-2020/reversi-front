@@ -21,11 +21,10 @@ export default {
   data () {
     return {
       reversi: '',
-      canSet: [],
       boardData: [],
       stateFlag: 0, // black 0, white 1, end 2
       infoText: '',
-      header: '',
+      header: '', // api header
       putFlag: true
     }
   },
@@ -44,6 +43,8 @@ export default {
         }).then((res) => {
           self.boardData = res.board
           this.reversi = new Reversi(self.boardData)
+        }).catch((e) => {
+          console.log(e)
         })
       }).catch((e) => {
         console.log(e)

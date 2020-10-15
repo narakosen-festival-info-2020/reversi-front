@@ -31,4 +31,5 @@ export default {
     height: calc((100vh - 20vh - #{$tablehw-sp})/2);
   }
 }
+
 </style>
