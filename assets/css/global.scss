@@ -16,3 +16,19 @@ $sp: 480px;  // スマホ
 		@content;
 	}
 }
+
+$tablehw:calc(min(80vw, 60vh));
+$tablehw-tab:calc(min(80vw, 60vh));
+$tablehw-sp:calc(min(90vw, 70vh));
+
+$hf-color:skyblue;
+
+%center-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.text {
+    display: block;
+  }
+}

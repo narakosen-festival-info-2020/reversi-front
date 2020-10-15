@@ -10,12 +10,18 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    bodyAttrs: {
+      class: 'body-class'
+    }
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
   ],
+  styleResources: {
+    scss: ['~/assets/css/global.scss']
+  },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
@@ -34,7 +40,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/style-resources'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -52,5 +59,15 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'custom',
+        path: '*',
+        component: resolve(__dirname, 'layouts/error.vue')
+      })
+    }
   }
 }

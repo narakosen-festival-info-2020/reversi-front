@@ -16,7 +16,7 @@ export default {}
   .header {
     height: 10vh;
     width: 100%;
-    background-color: skyblue;
+    background-color: $hf-color;
     position: relative;
   }
 

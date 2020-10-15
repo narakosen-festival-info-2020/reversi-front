@@ -21,7 +21,7 @@ export default { }
     height: 10vh;
     position: absolute;
     bottom: 0;
-    background-color: skyblue;
+    background-color: $hf-color;
     text-align: center;
   }
 
@@ -33,7 +33,7 @@ export default { }
   }
 
   .copyright {
-    font-size: 20px;
+    /* font-size: 10px; */
   }
 
 </style>

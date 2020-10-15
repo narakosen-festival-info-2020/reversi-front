@@ -1,10 +1,8 @@
 <template>
   <div class="main">
-    <div class="status-text">
-      <div class="text">
-        {{ statusText }}
-      </div>
-    </div>
+    <StatusText>
+      {{ statusText }}
+    </StatusText>
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
         <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`">
@@ -12,22 +10,16 @@
         </td>
       </tr>
     </table>
-    <div class="info-text">
-      <div class="text">
-        {{ infoText }}
-      </div>
-    </div>
+    <InfoText>
+      {{ infoText }}
+    </InfoText>
   </div>
 </template>
 
 <script>
-import Stone from './Stone.vue'
 import Reversi from './reversi'
 export default {
   name: 'Main',
-  components: {
-    Stone
-  },
   data () {
     return {
       reversi: '',
@@ -185,60 +177,10 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
-  @import './css/global.scss';
-
-  $tablehw:calc(min(80vw, 60vh));
-  $tablehw-tab:calc(min(80vw, 60vh));
-  $tablehw-sp:calc(min(90vw, 70vh));
-
-  %center-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: x-large;
-
-    &.text {
-      display: block;
-    }
-  }
-
   .main {
     height: 80vh;
     background-color: rgb(189, 126, 55);
     position: relative;
-  }
-
-  .status-text {
-    @extend %center-text;
-    text-align: center;
-    background-color: rgb(189, 126, 55);
-    height: calc((100vh - 20vh - #{$tablehw})/2);
-
-    @include tab {
-      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
-    }
-
-    @include sp {
-      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
-    }
-  }
-
-  .info-text {
-    @extend %center-text;
-    position: absolute;
-    text-align: center;
-    bottom: 0;
-    background-color: rgb(189, 126, 55);
-    height: calc((100vh - 20vh - #{$tablehw})/2);
-    width: 100%;
-
-    @include tab {
-      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
-    }
-
-    @include sp {
-      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
-    }
   }
 
   table {
