@@ -15,6 +15,7 @@ export default {
 <style lang="scss" scoped>
 .info-text {
   @extend %center-text;
+  font-size: x-large;
   position: absolute;
   text-align: center;
   bottom: 0;

@@ -12,6 +12,10 @@ export default {
     status: {
       type: Number,
       default: 0
+    },
+    boardData: {
+      type: Array,
+      default: () => {}
     }
   },
   data () {
@@ -37,9 +41,32 @@ export default {
           this.statusText = 'AI(白)の番です'
           break
         case 2:
-          this.statusText = '終わりです'
+          this.finishGame()
           break
       }
+    },
+    finishGame () {
+      let blackNum = 0
+      let whiteNum = 0
+      for (const i in this.boardData) {
+        for (const l in this.boardData) {
+          if (this.boardData[i][l] === 1) {
+            blackNum++
+          }
+          if (this.boardData[i][l] === 2) {
+            whiteNum++
+          }
+        }
+      }
+      let endText
+      if (blackNum === whiteNum) {
+        endText = 'あいこ'
+      } else if (blackNum > whiteNum) {
+        endText = 'あなたの勝ち'
+      } else {
+        endText = 'AIの勝ち'
+      }
+      this.statusText = `黒は${blackNum}個、白は${whiteNum}個で${endText}です`
     }
   }
 }
@@ -68,10 +95,20 @@ export default {
     }
 
     @include sp {
+      font-size: 1rem;
       height: calc((100vh - 20vh - #{$tablehw-sp})/2);
     }
 
+    @include sp-ip5 {
+      font-size: .9rem;
+    }
+
     .text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100% - 50px);
+      max-height: 50px;
       min-width: 280px;
       width: calc(#{$tablehw} - 20px);
       @include tab {

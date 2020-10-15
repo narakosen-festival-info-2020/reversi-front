@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <StatusText :status="stateFlag" />
+    <StatusText :status="stateFlag" :board-data="boardData" />
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
         <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`">
@@ -27,33 +27,6 @@ export default {
       infoText: '',
       header: '',
       putFlag: true
-    }
-  },
-  watch: {
-    stateFlag () {
-      if (this.stateFlag === 2) {
-        let blackNum = 0
-        let whiteNum = 0
-        for (const i in this.boardData) {
-          for (const l in this.boardData) {
-            if (this.boardData[i][l] === 1) {
-              blackNum++
-            }
-            if (this.boardData[i][l] === 2) {
-              whiteNum++
-            }
-          }
-        }
-        let endText
-        if (blackNum === whiteNum) {
-          endText = 'あいこ'
-        } else if (blackNum > whiteNum) {
-          endText = 'プレイヤー(黒)の勝ち'
-        } else {
-          endText = 'AI(白)の勝ち'
-        }
-        this.infoText = `プレイヤー(黒)は${blackNum}個、AI(白)は${whiteNum}個で${endText}です`
-      }
     }
   },
   mounted () {
@@ -95,7 +68,7 @@ export default {
               await this.playerPutStone(x, y)
               await this.enemyPutStone()
               while (this.reversi.finishSerch(this.stateFlag, this.boardData) === 2) {
-                this.infoText = 'プレイヤー(黒)のパスです'
+                this.infoText = 'あなた(黒)のパスです'
                 await this.enemyPutStone()
               }
               this.stateFlag = (this.stateFlag) ? 0 : 1
@@ -105,6 +78,7 @@ export default {
               break
             case 2:
               await this.playerPutStone(x, y)
+              await this.wait()
               this.infoText = 'AI(白)のパスです'
               break
           }
@@ -115,7 +89,7 @@ export default {
       }
     },
     async enemyPutStone () {
-      await new Promise(resolve => setTimeout(resolve, 2001))
+      await this.wait()
       await this.$axios.$get('/api/reversi/state', {
         headers: {
           Authorization: `Bearer ${this.header}`
@@ -142,6 +116,9 @@ export default {
         }).catch((e) => {
           console.log(e)
         })
+    },
+    async wait () {
+      await new Promise(resolve => setTimeout(resolve, 2001))
     }
   }
 }
