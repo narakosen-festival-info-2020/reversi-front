@@ -1,14 +1,50 @@
 <template>
   <div class="info-text">
     <div class="text">
-      <slot />
+      {{ infoText }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  props: {
+    info: {
+      type: Number,
+      default: 0
+    }
+  },
+  data () {
+    return {
+      infoText: ''
+    }
+  },
+  watch: {
+    info () {
+      this.changeText()
+    }
+  },
+  mounted () {
+    this.changeText()
+  },
+  methods: {
+    changeText () {
+      switch (this.info) {
+        case 0:
+          this.infoText = ''
+          break
+        case 1:
+          this.infoText = 'あなた(黒)のパスです'
+          break
+        case 2:
+          this.infoText = 'AI(白)のパスです'
+          break
+        case 3:
+          this.infoText = 'そこには置けません'
+          break
+      }
+    }
+  }
 }
 </script>
 

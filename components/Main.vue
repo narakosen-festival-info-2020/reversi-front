@@ -8,9 +8,7 @@
         </td>
       </tr>
     </table>
-    <InfoText>
-      {{ infoText }}
-    </InfoText>
+    <InfoText :info="infoFlag" />
   </div>
 </template>
 
@@ -23,7 +21,7 @@ export default {
       reversi: '',
       boardData: [],
       stateFlag: 0, // black 0, white 1, end 2
-      infoText: '',
+      infoFlag: 0,
       header: '', // api header
       putFlag: true
     }
@@ -55,7 +53,7 @@ export default {
     async clickPixel (x, y) {
       if (this.stateFlag !== 2 && this.putFlag) {
         this.putFlag = false
-        this.infoText = ''
+        this.infoFlag = 0
         if (this.reversi.canPutStone(x, y, this.stateFlag)) {
           this.boardData = [...this.reversi.getBoard]
           const f = this.reversi.finishSerch(this.stateFlag, this.boardData)
@@ -69,7 +67,7 @@ export default {
               await this.playerPutStone(x, y)
               await this.enemyPutStone()
               while (this.reversi.finishSerch(this.stateFlag, this.boardData) === 2) {
-                this.infoText = 'あなた(黒)のパスです'
+                this.infoFlag = 1
                 await this.enemyPutStone()
               }
               this.stateFlag = (this.stateFlag) ? 0 : 1
@@ -80,11 +78,11 @@ export default {
             case 2:
               await this.playerPutStone(x, y)
               await this.wait()
-              this.infoText = 'AI(白)のパスです'
+              this.infoFlag = 2
               break
           }
         } else {
-          this.infoText = 'そこには置けません'
+          this.infoFlag = 3
         }
         this.putFlag = true
       }
@@ -97,7 +95,7 @@ export default {
         }
       }).then((res) => {
         this.boardData = res.board
-        this.infoText = ''
+        this.infoFlag = 0
       }).catch((e) => {
         console.log(e)
       })
