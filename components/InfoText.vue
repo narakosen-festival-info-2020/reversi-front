@@ -1,8 +1,10 @@
 <template>
   <div class="info-text">
+    <TextFrame :state="3" :direction="0" :hide="info" />
     <div class="text">
       {{ infoText }}
     </div>
+    <TextFrame :state="3" :direction="1" :hide="info" />
   </div>
 </template>
 
@@ -16,7 +18,7 @@ export default {
   },
   data () {
     return {
-      infoText: ''
+      infoText: ' '
     }
   },
   watch: {

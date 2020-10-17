@@ -9,6 +9,7 @@
 <style lang='scss'>
   .body-class {
     margin: 0;
+    overflow: hidden;
   }
 
   #app {

@@ -1,8 +1,10 @@
 <template>
   <div class="status-text">
+    <TextFrame :state="status" :direction="0" />
     <div class="text">
       {{ statusText }}
     </div>
+    <TextFrame :state="status" :direction="1" />
   </div>
 </template>
 
@@ -117,27 +119,6 @@ export default {
 
       @include sp {
         width: calc(#{$tablehw-sp} - 20px);
-      }
-
-      margin: 10px 0;
-      position: relative;
-      padding: 0.5em .6em;
-      border-top: solid 2px black;
-      border-bottom: solid 2px black;
-
-      & slot {
-        margin: 0;
-        padding: 0;
-      }
-
-      &:before {
-        @extend %text-box;
-        left: 10px;
-      }
-
-      &:after {
-        @extend %text-box;
-        right: 10px;
       }
     }
   }
