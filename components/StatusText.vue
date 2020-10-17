@@ -68,7 +68,7 @@ export default {
       } else {
         endText = 'AIの勝ち'
       }
-      this.statusText = `黒は${blackNum}個、白は${whiteNum}個で${endText}です`
+      this.statusText = `黒は${blackNum}個、白は${whiteNum}個で\n${endText}です`
     }
   }
 }
@@ -89,7 +89,7 @@ export default {
     @extend %center-text;
     font-size: x-large;
     text-align: center;
-    background-color: rgb(189, 126, 55);
+    background-color: $bg-color;
     height: calc((100vh - 20vh - #{$tablehw})/2);
 
     @include tab {
@@ -101,25 +101,9 @@ export default {
       height: calc((100vh - 20vh - #{$tablehw-sp})/2);
     }
 
-    @include sp-ip5 {
-      font-size: .9rem;
-    }
-
-    .text {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100% - 50px);
-      max-height: 50px;
-      min-width: 280px;
-      width: calc(#{$tablehw} - 20px);
-      @include tab {
-        width: calc(#{$tablehw-tab} - 20px);
-      }
-
-      @include sp {
-        width: calc(#{$tablehw-sp} - 20px);
-      }
+    & .text{
+      white-space:pre-wrap;
+      word-wrap:break-word;
     }
   }
 

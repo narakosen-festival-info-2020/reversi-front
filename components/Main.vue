@@ -8,7 +8,7 @@
         </td>
       </tr>
     </table>
-    <InfoText :info="infoFlag" />
+    <InfoText :info="infoFlag" :status="stateFlag" />
   </div>
 </template>
 

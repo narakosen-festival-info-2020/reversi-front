@@ -3,6 +3,9 @@
     <TextFrame :state="3" :direction="0" :hide="info" />
     <div class="text">
       {{ infoText }}
+      <button v-if="status==2" @click="gameEnd">
+        Topへもどる
+      </button>
     </div>
     <TextFrame :state="3" :direction="1" :hide="info" />
   </div>
@@ -14,11 +17,16 @@ export default {
     info: {
       type: Number,
       default: 0
+    },
+    status: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
-      infoText: ' '
+      infoText: '',
+      finishGame: false
     }
   },
   watch: {
@@ -30,6 +38,9 @@ export default {
     this.changeText()
   },
   methods: {
+    gameEnd () {
+      this.$router.push('/')
+    },
     changeText () {
       switch (this.info) {
         case 0:
@@ -51,23 +62,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.info-text {
-  @extend %center-text;
-  font-size: x-large;
-  position: absolute;
-  text-align: center;
-  bottom: 0;
-  background-color: rgb(189, 126, 55);
-  height: calc((100vh - 20vh - #{$tablehw})/2);
-  width: 100%;
+  .info-text {
+    @extend %center-text;
+    font-size: x-large;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    background-color: $bg-color;
+    height: calc((100vh - 20vh - #{$tablehw})/2);
+    width: 100%;
 
-  @include tab {
-    height: calc((100vh - 20vh - #{$tablehw-tab})/2);
-  }
+    @include tab {
+      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
+    }
 
-  @include sp {
-    height: calc((100vh - 20vh - #{$tablehw-sp})/2);
+    @include sp {
+      font-size: 1rem;
+      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
+    }
   }
-}
 
 </style>
