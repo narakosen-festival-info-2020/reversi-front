@@ -1,11 +1,19 @@
 <template>
   <div>
-    <Main />
+    <button @click="gameStart">
+      Game Start
+    </button>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    gameStart () {
+      this.$router.push('/Game')
+    }
+  }
+}
 
 </script>
 
