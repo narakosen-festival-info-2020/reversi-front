@@ -30,7 +30,7 @@ export default {
     const self = this
     this.$axios.$post(
       '/api/generate', {
-        board_type: 'normal'
+        board_type: self.$store.state.boardType
       })
       .then((response) => {
         this.header = response.specific_code
@@ -42,11 +42,11 @@ export default {
           self.boardData = res.board
           this.reversi = new Reversi(self.boardData)
         }).catch((e) => {
-          console.log(e)
+          console.log('header error')
           this.$router.push('/error')
         })
       }).catch((e) => {
-        console.log(e)
+        console.log('can\'t generate')
         this.$router.push('/error')
       })
     // this.stateFunc()
@@ -99,7 +99,7 @@ export default {
         this.boardData = res.board
         this.infoFlag = 0
       }).catch((e) => {
-        console.log(e)
+        console.log('time error')
         this.$router.push('/error')
       })
     },
@@ -116,7 +116,7 @@ export default {
         .then(() => {
           console.log('put stone')
         }).catch((e) => {
-          console.log(e)
+          console.log('can\'t acction')
           this.$router.push('/error')
         })
     },
@@ -127,7 +127,6 @@ export default {
 }
 </script>
 
-<!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
   table {
     position: absolute;
