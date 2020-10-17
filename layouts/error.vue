@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <h1>{{ error.statusCode }}</h1>
-    <p v-if="error.statusCode === 404">
-      ページが見つかりません
+    <h1>エラーが発生しました</h1>
+    <p>
+      何度も表示される場合は、少し時間を開けてから再度開いてください。
     </p>
-    <p v-else>
-      エラーが発生しました
-    </p>
+    <div class="center">
+      <button @click="top">
+        Topへもどる
+      </button>
+    </div>
   </div>
 </template>
 
@@ -17,9 +19,26 @@ export default {
       type: Object,
       default: null
     }
+  },
+  mounted () {
+    console.log(this.error)
+  },
+  methods: {
+    top () {
+      this.$router.push('/')
+    }
   }
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
+  .container{
+    margin: 8px;
+    text-align: center;
+  }
+  .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

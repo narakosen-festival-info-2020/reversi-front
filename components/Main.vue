@@ -43,9 +43,11 @@ export default {
           this.reversi = new Reversi(self.boardData)
         }).catch((e) => {
           console.log(e)
+          this.$router.push('/error')
         })
       }).catch((e) => {
         console.log(e)
+        this.$router.push('/error')
       })
     // this.stateFunc()
   },
@@ -98,6 +100,7 @@ export default {
         this.infoFlag = 0
       }).catch((e) => {
         console.log(e)
+        this.$router.push('/error')
       })
     },
     async playerPutStone (x, y) {
@@ -114,6 +117,7 @@ export default {
           console.log('put stone')
         }).catch((e) => {
           console.log(e)
+          this.$router.push('/error')
         })
     },
     async wait () {
