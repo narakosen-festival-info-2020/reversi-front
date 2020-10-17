@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <button @click="gameStart">
       Game Start
     </button>
@@ -17,5 +17,5 @@ export default {
 
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 </style>

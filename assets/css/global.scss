@@ -52,3 +52,9 @@ $hf-color:skyblue; // header footer
     }
   }
 }
+
+.main{
+  height: 80vh;
+  background-color: $bg-color;
+  position: relative;
+}

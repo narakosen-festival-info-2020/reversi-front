@@ -129,12 +129,6 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
-  .main {
-    height: 80vh;
-    background-color: rgb(189, 126, 55);
-    position: relative;
-  }
-
   table {
     position: absolute;
     top: 50%;

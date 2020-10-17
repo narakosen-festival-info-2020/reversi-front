@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main">
     <h1>エラーが発生しました</h1>
     <p>
       何度も表示される場合は、少し時間を開けてから再度開いてください。
@@ -32,9 +32,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .container{
-    margin: 8px;
+  .main{
     text-align: center;
+  }
+  h1{
+    margin-top: 0;
+    padding-top: 21px;
   }
   .center{
     display: flex;
