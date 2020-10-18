@@ -29,9 +29,7 @@ export default {
   mounted () {
     const self = this
     this.$axios.$post(
-      '/api/generate', {
-        board_type: self.$store.state.boardType
-      })
+      '/api/generate', this.$store.getters.returnPostData)
       .then((response) => {
         this.header = response.specific_code
         this.$axios.$get('/api/reversi/state', {
@@ -79,7 +77,9 @@ export default {
               break
             case 2:
               await this.playerPutStone(x, y)
+              this.stateFlag = (this.stateFlag) ? 0 : 1
               await this.wait()
+              this.stateFlag = (this.stateFlag) ? 0 : 1
               this.infoFlag = 2
               break
           }

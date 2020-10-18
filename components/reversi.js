@@ -85,7 +85,7 @@ export default class Reversi {
     let returnFlag = false
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (moveX < 0 || moveX === this.board.length || moveY < 0 || moveY === this.board.length || this.board[moveY][moveX] === 9 || this.board[moveY][moveX] === 0) {
+      if (moveX < 0 || moveX === this.board.length || moveY < 0 || moveY === this.board.length || this.board[moveY][moveX] === -1 || this.board[moveY][moveX] === 0) {
         break
       }
       if (this.board[moveY][moveX] === playerState) {

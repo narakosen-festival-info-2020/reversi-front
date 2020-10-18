@@ -23,19 +23,40 @@ export default {
   },
   data () {
     return {
-      stoneClass: (this.stone === 1) ? 'stone-black' : (this.stone === 2) ? 'stone-white' : '',
+      stoneClass: '',
       positionX: this.xPosition,
       positionY: this.yPosition
     }
   },
   watch: {
     stone () {
-      this.stoneClass = (this.stone === 1) ? 'stone-black' : (this.stone === 2) ? 'stone-white' : ''
+      this.changeStoneClass()
     }
+  },
+  mounted () {
+    this.changeStoneClass()
   },
   methods: {
     cp () {
       this.$emit('cp', this.positionX, this.positionY)
+    },
+    changeStoneClass () {
+      let sc = ''
+      switch (this.stone) {
+        case -1:
+          sc = 'not-use'
+          break
+        case 0:
+          sc = ''
+          break
+        case 1:
+          sc = 'stone-black'
+          break
+        case 2:
+          sc = 'stone-white'
+          break
+      }
+      this.stoneClass = sc
     }
   }
 }
@@ -64,6 +85,12 @@ export default {
       height: 80%;
       border-radius: 50%;
       background: #fff;
+    }
+
+    & .not-use {
+      width: 100%;
+      height: 100%;
+      background: #000;
     }
 
     slot {

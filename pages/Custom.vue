@@ -2,11 +2,14 @@
   <div class="main">
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
-        <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`" :class="{boardOn:boardData[y][x]}" @click="bClick(y,x)">
+        <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`" :class="boardDataClass[y][x]" @click="bClick(y,x)">
           <!-- {{ boardData[y][x] }} -->
         </td>
       </tr>
     </table>
+    <button class="center" @click="gameStart">
+      Game Start
+    </button>
   </div>
 </template>
 
@@ -15,22 +18,58 @@ export default {
   name: 'Custom',
   data () {
     return {
-      boardData: []
+      boardData: [],
+      boardDataClass: [],
+      height: 20,
+      width: 20
     }
   },
   mounted () {
     const bd = []
+    const bdc = []
     for (let i = 0; i < 20; i++) {
       bd[i] = []
+      bdc[i] = []
       for (let l = 0; l < 20; l++) {
-        bd[i][l] = false
+        bd[i][l] = -1
+        bdc[i][l] = 'not-use'
       }
     }
     this.boardData = [...bd]
+    this.boardDataClass = [...bdc]
   },
   methods: {
     bClick (y, x) {
-      this.boardData[y].splice(x, 1, !this.boardData[y][x])
+      let bdState = this.boardData[y][x]
+      if (bdState !== 2) {
+        bdState++
+      } else {
+        bdState = -1
+      }
+      this.boardData[y].splice(x, 1, bdState)
+      this.changeClass(y, x, bdState)
+    },
+    changeClass (y, x, s) {
+      let changedClass = ''
+      switch (s) {
+        case -1:
+          changedClass = 'not-use'
+          break
+        case 0:
+          changedClass = 'use'
+          break
+        case 1:
+          changedClass = 'black-use'
+          break
+        case 2:
+          changedClass = 'white-use'
+          break
+      }
+      this.boardDataClass[y].splice(x, 1, changedClass)
+    },
+    gameStart () {
+      this.$store.commit('customSet', [this.height, this.width, this.boardData])
+      this.$router.push('/Game')
     }
   }
 }
@@ -59,8 +98,14 @@ export default {
 
     td{
       background: gray;
-      &.boardOn{
+      &.use{
         background: green;
+      }
+      &.black-use{
+        background: black;
+      }
+      &.white-use{
+        background: white;
       }
     }
   }

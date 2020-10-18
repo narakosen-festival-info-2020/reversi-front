@@ -50,7 +50,8 @@ export default {
   },
   proxy: {
     '/api': {
-      target: 'http://reversi-back-lb-1198456639.ap-northeast-1.elb.amazonaws.com/',
+      target: 'http://localhost:80/',
+      // target: 'http://reversi-back-lb-2042319709.ap-northeast-1.elb.amazonaws.com/',
       pathRewrite: {
         '^/api': '/'
       }
