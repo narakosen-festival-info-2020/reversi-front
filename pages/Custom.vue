@@ -1,5 +1,9 @@
 <template>
   <div class="main">
+    <div>
+      ルール<br>
+      一辺は5マス以上、必ずゲームを始める事ができる
+    </div>
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
         <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`" :class="boardDataClass[y][x]" @click="bClick(y,x)">
@@ -14,14 +18,14 @@
 </template>
 
 <script>
+import Reversi from '../components/reversi'
 export default {
   name: 'Custom',
   data () {
     return {
       boardData: [],
       boardDataClass: [],
-      height: 20,
-      width: 20
+      reversi: new Reversi([])
     }
   },
   mounted () {
@@ -68,8 +72,109 @@ export default {
       this.boardDataClass[y].splice(x, 1, changedClass)
     },
     gameStart () {
-      this.$store.commit('customSet', [this.height, this.width, this.boardData])
-      this.$router.push('/Game')
+      console.log(this.boardData)
+      const cb = this.cutBoard()
+      if (this.boardRule(cb)) {
+        this.$store.commit('customSet', [cb.length, cb[0].length, cb])
+        this.$router.push('/Game')
+      } else {
+        alert('ルールを守ってください')
+      }
+    },
+    boardRule (cb) {
+      const boolArr = []
+      boolArr.push((this.reversi.finishSerch(0, cb) === 1))
+      boolArr.push((cb.length >= 5))
+      boolArr.push((cb[0].length >= 5))
+
+      let flag = false
+      // eslint-disable-next-line no-labels
+      loop: for (let i = 0; i < cb.length; i++) {
+        for (let l = 0; l < cb[l].length; l++) {
+          if (cb[i][l] !== -1) {
+            flag = false
+            // eslint-disable-next-line no-labels
+            check: for (let m = -1; m < 1; m++) {
+              for (let n = -1; n < 1; n++) {
+                if (!(m === 0 && n === m) && i + m >= 0 && l + n >= 0 && i + m < cb.length && l + n < cb[0].length) {
+                  if (cb[i + m][l + n] !== -1) {
+                    flag = true
+                    // eslint-disable-next-line no-labels
+                    break check
+                  }
+                }
+              }
+            }
+            if (!flag) {
+              // eslint-disable-next-line no-labels
+              break loop
+            }
+          }
+        }
+      }
+      boolArr.push(flag)
+
+      console.log(boolArr)
+      return boolArr.reduce((a, b) => a && b)
+    },
+    cutBoard () {
+      const cutBoardData = JSON.parse(JSON.stringify(this.boardData))
+      let flag = true
+      while (flag) {
+        for (let i = 0; i < 20; i++) {
+          if (cutBoardData[0][i] !== -1) {
+            flag = false
+            break
+          }
+        }
+        if (flag) {
+          cutBoardData.shift()
+        }
+      }
+
+      flag = true
+      while (flag) {
+        for (let i = 0; i < 20; i++) {
+          if (cutBoardData[cutBoardData.length - 1][i] !== -1) {
+            flag = false
+            break
+          }
+        }
+        if (flag) {
+          cutBoardData.pop()
+        }
+      }
+
+      flag = true
+      while (flag) {
+        for (let i = 0; i < cutBoardData.length; i++) {
+          if (cutBoardData[i][0] !== -1) {
+            flag = false
+            break
+          }
+        }
+        if (flag) {
+          for (let l = 0; l < cutBoardData.length; l++) {
+            cutBoardData[l].shift()
+          }
+        }
+      }
+
+      flag = true
+      while (flag) {
+        for (let i = 0; i < cutBoardData.length; i++) {
+          if (cutBoardData[i][cutBoardData[i].length - 1] !== -1) {
+            flag = false
+            break
+          }
+        }
+        if (flag) {
+          for (let l = 0; l < cutBoardData.length; l++) {
+            cutBoardData[l].pop()
+          }
+        }
+      }
+      return cutBoardData
     }
   }
 }
