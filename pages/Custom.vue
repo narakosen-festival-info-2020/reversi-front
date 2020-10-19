@@ -87,32 +87,51 @@ export default {
       boolArr.push((cb.length >= 5))
       boolArr.push((cb[0].length >= 5))
 
-      let flag = false
-      // eslint-disable-next-line no-labels
-      loop: for (let i = 0; i < cb.length; i++) {
-        for (let l = 0; l < cb[l].length; l++) {
+      // 全体のセルが連結であるか調べるため
+      // 全体のセル数を調べ、適当に選んだ一つの連結成分の要素数と一致するか調べる
+      let cellExpectedCount = 0
+      let cellActualCount = 0
+      const stack = []
+      const boardSearch = new Array(cb.length)
+      for (let i = 0; i < cb.length; i++) {
+        boardSearch[i] = new Array(cb[i].length)
+        boardSearch[i].fill(0)
+        for (let l = 0; l < cb[i].length; l++) {
           if (cb[i][l] !== -1) {
-            flag = false
-            // eslint-disable-next-line no-labels
-            check: for (let m = -1; m < 1; m++) {
-              for (let n = -1; n < 1; n++) {
-                if (!(m === 0 && n === m) && i + m >= 0 && l + n >= 0 && i + m < cb.length && l + n < cb[0].length) {
-                  if (cb[i + m][l + n] !== -1) {
-                    flag = true
-                    // eslint-disable-next-line no-labels
-                    break check
-                  }
-                }
-              }
-            }
-            if (!flag) {
-              // eslint-disable-next-line no-labels
-              break loop
+            cellExpectedCount++
+            if (stack.length === 0) {
+              boardSearch[i][l] = 1
+              stack.push({
+                y: i,
+                x: l
+              })
             }
           }
         }
       }
-      boolArr.push(flag)
+      // dfs実装
+      while (stack.length) {
+        cellActualCount++
+        const top = stack.pop()
+        const fy = top.y
+        const fx = top.x
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const ty = fy + dy
+            const tx = fx + dx
+            if (ty >= 0 && ty < cb.length && tx >= 0 && tx < cb[ty].length) {
+              if (boardSearch[ty][tx] === 0 && cb[ty][tx] !== -1) {
+                boardSearch[ty][tx] = 1
+                stack.push({
+                  y: ty,
+                  x: tx
+                })
+              }
+            }
+          }
+        }
+      }
+      boolArr.push(cellActualCount === cellExpectedCount)
 
       console.log(boolArr)
       return boolArr.reduce((a, b) => a && b)
