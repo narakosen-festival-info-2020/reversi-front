@@ -1,9 +1,9 @@
 <template>
   <div class="main">
     <StatusText :status="stateFlag" :board-data="boardData" />
-    <table>
+    <table :class="boardClass">
       <tr v-for="(stateA,y) of boardData" :key="y">
-        <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`">
+        <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`" :class="{non:boardData[y][x]===-1}">
           <Stone :x-position="x" :y-position="y" :stone="boardData[y][x]" @cp="clickPixel" />
         </td>
       </tr>
@@ -20,6 +20,7 @@ export default {
     return {
       reversi: '',
       boardData: [],
+      boardClass: [],
       stateFlag: 0, // black 0, white 1, end 2
       infoFlag: 0,
       header: '', // api header
@@ -39,6 +40,8 @@ export default {
         }).then((res) => {
           self.boardData = res.board
           this.reversi = new Reversi(self.boardData)
+          // add class
+          self.boardClass = 'table-size-' + res.board.length + '-' + res.board[0].length
         }).catch((e) => {
           console.log('header error')
           this.$router.push('/error')
@@ -47,7 +50,6 @@ export default {
         console.log('can\'t generate')
         this.$router.push('/error')
       })
-    // this.stateFunc()
   },
   methods: {
     async clickPixel (x, y) {
@@ -133,19 +135,33 @@ export default {
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    background: black;
-    border: 1px solid black;
-    width: $tablehw;
-    height: $tablehw;
+    border-collapse:collapse;
+    text-align: center;
 
-    @include tab {
-      width: $tablehw-tab;
-      height: $tablehw-tab;
+    @for $i from 1 through 20 {
+      @for $l from 1 through 20 {
+        &.table-size-#{$i}-#{$l} {
+          width: boardSize($tablehw, $l, $i);
+          height: boardSize($tablehw, $i, $l);
+          @include tab {
+            width: boardSize($tablehw-tab, $l, $i);
+            height: boardSize($tablehw-tab, $i, $l);
+          }
+          @include sp {
+            width: boardSize($tablehw-sp, $l, $i);
+            height: boardSize($tablehw-sp, $i, $l);
+          }
+        }
+      }
     }
 
-    @include sp {
-      width: $tablehw-sp;
-      height: $tablehw-sp;
+    td{
+      border: 3px solid black;
+      padding: 0;
+
+      &.non{
+        visibility:hidden;
+      }
     }
   }
 </style>
