@@ -5,13 +5,13 @@
         モードを選んでください
       </div>
       <div class="btn-wrapper">
-        <button class="center mode-btn" @click="gameStart">
+        <button class="center mode-btn btn-black" @click="gameStart">
           Game Start
         </button>
-        <button class="center mode-btn" @click="gameRandom">
+        <button class="center mode-btn btn-black" @click="gameRandom">
           Rondom Game Start
         </button>
-        <button class="center mode-btn" @click="gameCustom">
+        <button class="center mode-btn btn-white" @click="gameCustom">
           Custom Game
         </button>
       </div>
@@ -74,8 +74,11 @@ export default {
   width: 100%;
   margin: 10px 0px;
   padding: 10px;
-  border: 5px solid #191919;
   border-radius: 6px;
+}
+
+.btn-black {
+  border: 5px solid #191919;
   color: white;
   background-color: #292929;
   /*ストライプを作る*/
@@ -83,6 +86,18 @@ export default {
     -45deg,
     transparent, transparent 5px,
     #393939, #393939 8px
+  );
+}
+
+.btn-white {
+  border: 5px solid #e9e9e9;
+  color: black;
+  background-color: #d9d9d9;
+  /*ストライプを作る*/
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent, transparent 5px,
+    #c9c9c9, #c9c9c9 8px
   );
 }
 
