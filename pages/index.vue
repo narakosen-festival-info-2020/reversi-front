@@ -26,7 +26,7 @@ export default {
       this.$store.commit('set', 'normal')
       this.$router.push('/Game')
     },
-    gameRandom () {
+    gameCircle () {
       this.$store.commit('set', 'circle')
       this.$router.push('/Game')
     },
