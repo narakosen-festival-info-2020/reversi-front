@@ -7,8 +7,8 @@
       <button class="center" @click="gameStart">
         Game Start
       </button>
-      <button class="center" @click="gameRandom">
-        Rondom Game Start
+      <button class="center" @click="gameCircle">
+        Circle Game Start
       </button>
       <button class="center" @click="gameCustom">
         Custom Game
@@ -25,7 +25,7 @@ export default {
       this.$router.push('/Game')
     },
     gameRandom () {
-      this.$store.commit('set', 'random')
+      this.$store.commit('set', 'circle')
       this.$router.push('/Game')
     },
     gameCustom () {
