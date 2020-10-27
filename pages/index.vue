@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="box">
-      <div class="select-mode">
+      <div class="main-title">
         モードを選んでください
       </div>
       <div class="btn-wrapper">
@@ -48,24 +48,5 @@ export default {
   left:50%;
   transform: translateX(-50%) translateY(-50%);
   text-align: center;
-  .select-mode{
-    font-size: 2rem;
-    @include sp-ip5 {
-      font-size: 1.7rem;
-    }
-    color: black;
-    font-family: vdl-logojrblack, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    text-shadow:
-      2px  2px 0px #ffffff,
-      -2px  2px 0px #ffffff,
-      2px -2px 0px #ffffff,
-      -2px -2px 0px #ffffff,
-      2px  0px 0px #ffffff,
-      0px  2px 0px #ffffff,
-      -2px  0px 0px #ffffff,
-      0px -2px 0px #ffffff;
-  }
 }
 </style>

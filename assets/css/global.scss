@@ -34,15 +34,17 @@ $tablehw-sp:calc(min(90vw, 70vh));
 $bg-color:rgb(189, 126, 55); //background color
 $hf-color:skyblue; // header footer
 
-%center-text {
+.center{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+%center-text {
+  @extend .center;
 
   & .text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend .center;
     height: calc(100% - 50px);
     max-height: 50px;
     min-width: 280px;
@@ -122,4 +124,27 @@ $hf-color:skyblue; // header footer
       #c9c9c9, #c9c9c9 8px
     );
   }
+}
+
+.main-title{
+  font-size: 2rem;
+  @include sp-ip5 {
+    font-size: 1.7rem;
+  }
+  @extend .character-edge;
+}
+
+.character-edge{
+  color: black;
+  font-style: normal;
+  font-weight: 900;
+  text-shadow:
+    2px  2px 0px #ffffff,
+    -2px  2px 0px #ffffff,
+    2px -2px 0px #ffffff,
+    -2px -2px 0px #ffffff,
+    2px  0px 0px #ffffff,
+    0px  2px 0px #ffffff,
+    -2px  0px 0px #ffffff,
+    0px -2px 0px #ffffff;
 }

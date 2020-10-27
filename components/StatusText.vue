@@ -76,14 +76,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  %text-box {
-    content: '';
-    position: absolute;
-    top: -10px;
-    width: 2px;
-    height: calc(100% + 20px);
-    background-color: black;
-  }
 
   .status-text {
     @extend %center-text;
