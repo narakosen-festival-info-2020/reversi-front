@@ -11,9 +11,12 @@
         <button class="btn-black" @click="gameCircle">
           Circle Game Start
         </button>
-        <button class="btn-white" @click="gameCustom">
+        <button :class="['btn-white', {'not-click':isMorT}]" @click="gameCustom">
           Custom Game
         </button>
+      </div>
+      <div v-if="isMorT" class="character-edge">
+        カスタムモードはPCでお楽しみください
       </div>
     </div>
   </div>
@@ -21,6 +24,16 @@
 
 <script>
 export default {
+  data () {
+    return {
+      isMorT: false
+    }
+  },
+  mounted () {
+    if (this.$device.isMobileOrTablet) {
+      this.isMorT = true
+    }
+  },
   methods: {
     gameStart () {
       this.$store.commit('set', 'normal')
@@ -31,8 +44,10 @@ export default {
       this.$router.push('/Game')
     },
     gameCustom () {
-      this.$store.commit('set', 'custom')
-      this.$router.push('/Custom')
+      if (!this.isMorT) {
+        this.$store.commit('set', 'custom')
+        this.$router.push('/Custom')
+      }
     }
   }
 }
@@ -48,5 +63,29 @@ export default {
   left:50%;
   transform: translateX(-50%) translateY(-50%);
   text-align: center;
+}
+
+.not-click{
+  position: relative;
+  &::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background: red;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(5deg);
+  }
+  &::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background: red;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(-5deg);
+  }
 }
 </style>

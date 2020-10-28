@@ -41,7 +41,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/device'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
