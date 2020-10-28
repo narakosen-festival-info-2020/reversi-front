@@ -1,11 +1,13 @@
 <template>
   <div class="main">
-    <h1>エラーが発生しました</h1>
-    <p>
+    <h1 class="main-title">
+      エラーが発生しました
+    </h1>
+    <p class="character-edge">
       何度も表示される場合は、少し時間を開けてから再度開いてください。
     </p>
-    <div class="center">
-      <button @click="top">
+    <div class="center btn-wrapper">
+      <button class="btn-black" @click="top">
         Topへもどる
       </button>
     </div>
@@ -32,16 +34,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .main{
-    text-align: center;
-  }
-  h1{
-    margin-top: 0;
-    padding-top: 21px;
-  }
-  .center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.main{
+  text-align: center;
+}
+h1{
+  margin-top: 0;
+  padding-top: 21px;
+}
 </style>

@@ -1,8 +1,14 @@
 <template>
   <div class="main">
-    <div>
-      ルール<br>
-      一辺は5マス以上、必ずゲームを始める事ができる
+    <div class="rule">
+      <div class="rule-text character-edge">
+        <div class="rule-title">
+          ルール
+        </div>
+        <div>
+          一辺は5マス以上で必ずゲームを始める事ができるようにしてください
+        </div>
+      </div>
     </div>
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
@@ -11,9 +17,11 @@
         </td>
       </tr>
     </table>
-    <button class="center" @click="gameStart">
-      Game Start
-    </button>
+    <div class="button btn-wrapper">
+      <button class="center btn-black" @click="gameStart">
+        Game Start
+      </button>
+    </div>
   </div>
 </template>
 
@@ -72,9 +80,8 @@ export default {
       this.boardDataClass[y].splice(x, 1, changedClass)
     },
     gameStart () {
-      console.log(this.boardData)
       const cb = this.cutBoard()
-      if (this.boardRule(cb)) {
+      if (cb.length !== 0 && this.boardRule(cb)) {
         this.$store.commit('customSet', [cb.length, cb[0].length, cb])
         this.$router.push('/Game')
       } else {
@@ -133,13 +140,18 @@ export default {
       }
       boolArr.push(cellActualCount === cellExpectedCount)
 
-      console.log(boolArr)
       return boolArr.reduce((a, b) => a && b)
     },
     cutBoard () {
       const cutBoardData = JSON.parse(JSON.stringify(this.boardData))
-      let flag = true
+      let exceptionFlg = false
+      let flag = !exceptionFlg
+
       while (flag) {
+        if (!cutBoardData.length) {
+          exceptionFlg = true
+          break
+        }
         for (let i = 0; i < 20; i++) {
           if (cutBoardData[0][i] !== -1) {
             flag = false
@@ -151,7 +163,7 @@ export default {
         }
       }
 
-      flag = true
+      flag = !exceptionFlg
       while (flag) {
         for (let i = 0; i < 20; i++) {
           if (cutBoardData[cutBoardData.length - 1][i] !== -1) {
@@ -164,7 +176,7 @@ export default {
         }
       }
 
-      flag = true
+      flag = !exceptionFlg
       while (flag) {
         for (let i = 0; i < cutBoardData.length; i++) {
           if (cutBoardData[i][0] !== -1) {
@@ -179,7 +191,7 @@ export default {
         }
       }
 
-      flag = true
+      flag = !exceptionFlg
       while (flag) {
         for (let i = 0; i < cutBoardData.length; i++) {
           if (cutBoardData[i][cutBoardData[i].length - 1] !== -1) {
@@ -232,5 +244,24 @@ export default {
         background: white;
       }
     }
+  }
+
+  .rule{
+    @extend .center;
+    height: calc((100vh - 20vh - #{$tablehw})/2);
+    text-align: center;
+    .rule-text{
+      display: block;
+      .rule-title{
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .button{
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>

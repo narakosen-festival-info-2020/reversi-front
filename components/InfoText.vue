@@ -1,9 +1,9 @@
 <template>
   <div class="info-text">
     <TextFrame :state="3" :direction="0" :hide="info" />
-    <div class="text">
+    <div class="text btn-wrapper">
       {{ infoText }}
-      <button v-if="status==2" @click="gameEnd">
+      <button v-if="status==2" class="btn-black" @click="gameEnd">
         Topへもどる
       </button>
     </div>

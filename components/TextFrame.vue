@@ -86,9 +86,7 @@ export default {
 
   .frame{
     transform:translateX(calc(#{$heigth}*(6))) rotate(-90deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend .center;
     &.right-direction{
       transform:translateX(calc(#{$heigth}*(-5))) rotate(90deg);
     }

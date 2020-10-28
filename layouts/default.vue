@@ -10,6 +10,7 @@
   .body-class {
     margin: 0;
     overflow: hidden;
+    font-family: vdl-logojrblack, sans-serif;
   }
 
   #app {
