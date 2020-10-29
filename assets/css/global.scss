@@ -1,6 +1,6 @@
-$pc: 1024px; // PC
-$tab: 768px; // タブレット
-$sp: 480px;  // スマホ
+$pc: 1024px;
+$tab: 768px;
+$sp: 480px;
 @mixin pc {
 	@media (max-width: ($pc)) {
 		@content;
@@ -31,8 +31,8 @@ $tablehw:calc(min(80vw, 60vh));
 $tablehw-tab:calc(min(80vw, 60vh));
 $tablehw-sp:calc(min(90vw, 70vh));
 
-$bg-color:rgb(189, 126, 55); //background color
-$hf-color:skyblue; // header footer
+$bg-color:rgb(189, 126, 55);
+$hf-color:skyblue;
 
 .center{
   display: flex;

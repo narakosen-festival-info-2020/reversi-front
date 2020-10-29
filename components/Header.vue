@@ -6,12 +6,6 @@
   </div>
 </template>
 
-<script>
-export default {}
-
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
   .header {
     height: 10vh;
@@ -25,7 +19,6 @@ export default {}
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-
     font-size: 20px;
   }
 

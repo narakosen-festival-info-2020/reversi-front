@@ -12,9 +12,7 @@
     </div>
     <table>
       <tr v-for="(stateA,y) of boardData" :key="y">
-        <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`" :class="boardDataClass[y][x]" @click="bClick(y,x)">
-          <!-- {{ boardData[y][x] }} -->
-        </td>
+        <td v-for="(stateB,x) of stateA" :key="`${x}-${y}`" :class="boardDataClass[y][x]" @click="bClick(y,x)" />
       </tr>
     </table>
     <div class="button btn-wrapper">
@@ -94,8 +92,6 @@ export default {
       boolArr.push((cb.length >= 5))
       boolArr.push((cb[0].length >= 5))
 
-      // 全体のセルが連結であるか調べるため
-      // 全体のセル数を調べ、適当に選んだ一つの連結成分の要素数と一致するか調べる
       let cellExpectedCount = 0
       let cellActualCount = 0
       const stack = []
@@ -116,7 +112,7 @@ export default {
           }
         }
       }
-      // dfs実装
+
       while (stack.length) {
         cellActualCount++
         const top = stack.pop()

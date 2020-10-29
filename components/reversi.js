@@ -50,7 +50,7 @@ export default class Reversi {
   }
 
   putStone (x, y, playerState, i) {
-    this.board[y][x] = playerState // put
+    this.board[y][x] = playerState
     let moveX = x + this.movingCollection[i].x
     let moveY = y + this.movingCollection[i].y
     // eslint-disable-next-line no-constant-condition
