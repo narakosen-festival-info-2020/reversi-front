@@ -23,7 +23,7 @@ export default {
       boardClass: [],
       stateFlag: 0, // black 0, white 1, end 2
       infoFlag: 0,
-      header: '', // api header
+      header: '',
       putFlag: true
     }
   },
@@ -43,10 +43,12 @@ export default {
           // add class
           self.boardClass = 'table-size-' + res.board.length + '-' + res.board[0].length
         }).catch((e) => {
+          // eslint-disable-next-line no-console
           console.log('header error')
           this.$router.push('/error')
         })
       }).catch((e) => {
+        // eslint-disable-next-line no-console
         console.log('can\'t generate')
         this.$router.push('/error')
       })
@@ -101,6 +103,7 @@ export default {
         this.boardData = res.board
         this.infoFlag = 0
       }).catch((e) => {
+        // eslint-disable-next-line no-console
         console.log('time error')
         this.$router.push('/error')
       })
@@ -116,8 +119,10 @@ export default {
           }
         })
         .then(() => {
-          console.log('put stone')
+          // eslint-disable-next-line no-console
+          console.log('can\'t put stone')
         }).catch((e) => {
+          // eslint-disable-next-line no-console
           console.log('can\'t acction')
           this.$router.push('/error')
         })

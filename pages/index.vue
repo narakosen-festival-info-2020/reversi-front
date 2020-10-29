@@ -55,37 +55,37 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
-.box{
-  width: 100%;
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translateX(-50%) translateY(-50%);
-  text-align: center;
-}
-
-.not-click{
-  position: relative;
-  &::before{
-    content: "";
-    position: absolute;
+  .box{
     width: 100%;
-    height: 10%;
-    background: red;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%) rotate(5deg);
-  }
-  &::after{
-    content: "";
     position: absolute;
-    width: 100%;
-    height: 10%;
-    background: red;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%) rotate(-5deg);
+    top:50%;
+    left:50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
   }
-}
+
+  .not-click{
+    position: relative;
+    &::before{
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 10%;
+      background: red;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%) rotate(5deg);
+    }
+    &::after{
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 10%;
+      background: red;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%) rotate(-5deg);
+    }
+  }
+
 </style>

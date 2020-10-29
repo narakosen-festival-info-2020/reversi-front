@@ -76,7 +76,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
   .status-text {
     @extend %center-text;
     font-size: x-large;
