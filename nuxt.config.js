@@ -47,17 +47,18 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    prefix: '/api'
+    // prefix: '/api'
+    baseURL: 'https://reversi-back.nitncfes.net/'
   },
-  proxy: {
-    '/api': {
-      // target: 'http://localhost:80/',
-      target: 'https://reversi-back.nitncfes.net/',
-      pathRewrite: {
-        '^/api': '/'
-      }
-    }
-  },
+  // proxy: {
+  //   '/api': {
+  //     // target: 'http://localhost:80/',
+  //     target: 'https://reversi-back.nitncfes.net/',
+  //     pathRewrite: {
+  //       '^/api': '/'
+  //     }
+  //   }
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
