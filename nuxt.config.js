@@ -5,7 +5,7 @@ export default {
   ssr: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'reversi-front',
+    title: 'AIリバーシ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -46,7 +46,8 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/style-resources',
     '@nuxtjs/device',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/pwa'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -80,5 +81,16 @@ export default {
         component: resolve(__dirname, 'layouts/error.vue')
       })
     }
+  },
+
+  manifest: {
+    name: 'AIリバーシ',
+    short_name: 'AIリバーシ',
+    description: 'AIと戦うリバーシゲームです',
+    start_url: '/',
+    display: 'standalone',
+    orientation: 'any',
+    background_color: '#fff',
+    theme_color: '#fff'
   }
 }
