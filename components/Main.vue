@@ -30,10 +30,10 @@ export default {
   mounted () {
     const self = this
     this.$axios.$post(
-      '/api/generate', this.$store.getters.returnPostData)
+      '/generate', this.$store.getters.returnPostData)
       .then((response) => {
         this.header = response.specific_code
-        this.$axios.$get('/api/reversi/state', {
+        this.$axios.$get('/reversi/state', {
           headers: {
             Authorization: `Bearer ${this.header}`
           }
@@ -95,7 +95,7 @@ export default {
     },
     async enemyPutStone () {
       await this.wait()
-      await this.$axios.$get('/api/reversi/state', {
+      await this.$axios.$get('/reversi/state', {
         headers: {
           Authorization: `Bearer ${this.header}`
         }
@@ -110,7 +110,7 @@ export default {
     },
     async playerPutStone (x, y) {
       await this.$axios.$post(
-        '/api/reversi/state/action', {
+        '/reversi/state/action', {
           x,
           y
         }, {
