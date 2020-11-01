@@ -51,7 +51,7 @@ export default {
       let blackNum = 0
       let whiteNum = 0
       for (const i in this.boardData) {
-        for (const l in this.boardData) {
+        for (const l in this.boardData[i]) {
           if (this.boardData[i][l] === 1) {
             blackNum++
           }
