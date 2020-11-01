@@ -1,3 +1,6 @@
+require('dotenv').config()
+const { API } = process.env
+
 export default {
   ssr: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -42,24 +45,28 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/style-resources',
-    '@nuxtjs/device'
+    '@nuxtjs/device',
+    '@nuxtjs/dotenv'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    // prefix: '/api'
-    baseURL: 'https://reversi-back.nitncfes.net/',
-    credentials: true
+    prefix: '/api'
+    // baseURL: 'https://reversi-back.nitncfes.net/',
+    // credentials: true
   },
-  // proxy: {
-  //   '/api': {
-  //     // target: 'http://localhost:80/',
-  //     target: 'https://reversi-back.nitncfes.net/',
-  //     pathRewrite: {
-  //       '^/api': '/'
-  //     }
-  //   }
-  // },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:80/',
+      // target: 'https://reversi-back.nitncfes.net/',
+      pathRewrite: {
+        '^/api': '/'
+      }
+    }
+  },
+  env: {
+    API
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
