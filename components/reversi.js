@@ -85,7 +85,7 @@ export default class Reversi {
     let returnFlag = false
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (moveX < 0 || moveX === this.board.length || moveY < 0 || moveY === this.board.length || this.board[moveY][moveX] === -1 || this.board[moveY][moveX] === 0) {
+      if (moveX < 0 || moveX === this.board[0].length || moveY < 0 || moveY === this.board.length || this.board[moveY][moveX] === -1 || this.board[moveY][moveX] === 0) {
         break
       }
       if (this.board[moveY][moveX] === playerState) {
@@ -109,7 +109,7 @@ export default class Reversi {
     const bwFlag = [false, false]
     let returnFlag = 0 // 0 end, 1 continue ,2 skip
     for (let y = 0; y < this.board.length; y++) {
-      for (let x = 0; x < this.board.length; x++) {
+      for (let x = 0; x < this.board[y].length; x++) {
         for (let i = 0; i < this.movingCollection.length; i++) {
           if (this.board[y][x] === 0) {
             if (this.canPutStoneSearch(x, y, playerState, enemyState, i)) {

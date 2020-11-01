@@ -30,10 +30,10 @@ export default {
   mounted () {
     const self = this
     this.$axios.$post(
-      'https://reversi-back.nitncfes.net/generate', this.$store.getters.returnPostData)
+      `${process.env.API}/generate`, this.$store.getters.returnPostData)
       .then((response) => {
         this.header = response.specific_code
-        this.$axios.$get('https://reversi-back.nitncfes.net/reversi/state', {
+        this.$axios.$get(`${process.env.API}/reversi/state`, {
           headers: {
             Authorization: `Bearer ${this.header}`
           }
@@ -95,7 +95,7 @@ export default {
     },
     async enemyPutStone () {
       await this.wait()
-      await this.$axios.$get('https://reversi-back.nitncfes.net/reversi/state', {
+      await this.$axios.$get(`${process.env.API}/reversi/state`, {
         headers: {
           Authorization: `Bearer ${this.header}`
         }
@@ -110,7 +110,7 @@ export default {
     },
     async playerPutStone (x, y) {
       await this.$axios.$post(
-        'https://reversi-back.nitncfes.net/reversi/state/action', {
+        `${process.env.API}/reversi/state/action`, {
           x,
           y
         }, {
@@ -120,7 +120,7 @@ export default {
         })
         .then(() => {
           // eslint-disable-next-line no-console
-          console.log('can\'t put stone')
+          console.log('can put stone')
         }).catch((e) => {
           // eslint-disable-next-line no-console
           console.log('can\'t acction')
