@@ -8,7 +8,7 @@
 
 <style lang='scss' scoped>
   .header {
-    height: 10vh;
+    height: 10%;
     width: 100%;
     background-color: $hf-color;
     position: relative;
