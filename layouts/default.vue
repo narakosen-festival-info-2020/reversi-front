@@ -1,13 +1,13 @@
 <template>
   <div>
     <Header />
-    <Nuxt />
+    <Nuxt class="nuxt-box" />
     <Footer />
   </div>
 </template>
 
 <style lang='scss'>
-  .body-class {
+  body {
     margin: 0;
     overflow: hidden;
     font-family: vdl-logojrblack, sans-serif;
@@ -18,8 +18,12 @@
     position: relative;
   }
 
-    html, body, #__nuxt, #__layout, #__layout > div {
-        height: 100%;
-    }
+  .nuxt-box{
+    height: 100%;
+  }
+
+  html, body, #__nuxt, #__layout, #__layout > div{
+    height: 100%;
+  }
 
 </style>

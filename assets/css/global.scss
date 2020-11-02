@@ -27,9 +27,10 @@ $sp: 480px;
 	@return calc(#{$value} * min(#{$i} / #{$l}, 1));
 }
 
-$tablehw:calc(min(80vw, 60%));
-$tablehw-tab:calc(min(80vw, 60%));
-$tablehw-sp:calc(min(90vw, 70%));
+// $tablehw:calc(min(80vw, 60%));
+$tablehw:60vmin;
+$tablehw-tab:70vmin;
+$tablehw-sp:90vmin;
 
 $bg-color:rgb(189, 126, 55);
 $hf-color:skyblue;
