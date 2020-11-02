@@ -69,16 +69,16 @@ export default {
     text-align: center;
     bottom: 0;
     background-color: $bg-color;
-    height: calc((100vh - 20vh - #{$tablehw})/2);
+    height: calc((100% - #{$tablehw})/2);
     width: 100%;
 
     @include tab {
-      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
+      height: calc((100% - #{$tablehw-tab})/2);
     }
 
     @include sp {
       font-size: 1rem;
-      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
+      height: calc((100% - #{$tablehw-sp})/2);
     }
   }
 
