@@ -66,8 +66,7 @@ export default {
 <style lang='scss' scoped>
   .stone {
     width: 100%;
-    height: calc(100% + 1.5px);
-    background: rgb(38, 133, 1);
+    height: 100%;
     @extend .center;
 
     & .stone-black {
