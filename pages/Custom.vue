@@ -244,7 +244,7 @@ export default {
 
   .rule{
     @extend .center;
-    height: calc((100vh - 20vh - #{$tablehw})/2);
+    height: calc((100% - #{$tablehw})/2);
     text-align: center;
     .rule-text{
       display: block;

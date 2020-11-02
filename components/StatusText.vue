@@ -81,15 +81,15 @@ export default {
     font-size: x-large;
     text-align: center;
     background-color: $bg-color;
-    height: calc((100vh - 20vh - #{$tablehw})/2);
+    height: calc((100% - #{$tablehw})/2);
 
     @include tab {
-      height: calc((100vh - 20vh - #{$tablehw-tab})/2);
+      height: calc((100% - #{$tablehw-tab})/2);
     }
 
     @include sp {
       font-size: 1rem;
-      height: calc((100vh - 20vh - #{$tablehw-sp})/2);
+      height: calc((100% - #{$tablehw-sp})/2);
     }
 
     & .text{
