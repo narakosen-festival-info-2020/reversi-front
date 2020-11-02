@@ -27,7 +27,6 @@ $sp: 480px;
 	@return calc(#{$value} * min(#{$i} / #{$l}, 1));
 }
 
-// $tablehw:calc(min(80vw, 60%));
 $tablehw:60vmin;
 $tablehw-tab:70vmin;
 $tablehw-sp:90vmin;
