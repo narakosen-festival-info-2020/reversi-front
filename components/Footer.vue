@@ -12,7 +12,7 @@
 <style lang='scss' scoped>
   .footer {
     width: 100%;
-    height: 10vh;
+    height: 10%;
     position: absolute;
     bottom: 0;
     background-color: $hf-color;
