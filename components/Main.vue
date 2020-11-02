@@ -163,9 +163,12 @@ export default {
     td{
       border: 3px solid black;
       padding: 0;
+      height: 10%;
+      background: rgb(38, 133, 1);
 
       &.non{
         visibility:hidden;
+        border: none;
       }
     }
   }
