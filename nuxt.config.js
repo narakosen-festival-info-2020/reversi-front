@@ -15,12 +15,27 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'http://mplus-fonts.sourceforge.jp/webfonts/basic_latin/mplus_webfonts.css'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'http://mplus-fonts.sourceforge.jp/webfonts/general-j/mplus_webfonts.css'
+      }
     ]
+  },
+
+  metaInfo: {
+    htmlAttrs: {
+      lang: 'ja'
+    }
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+
   ],
   styleResources: {
     scss: ['~/assets/css/global.scss']
@@ -52,8 +67,18 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
+    // prefix: '/api'
+    // baseURL: 'https://reversi-back.nitncfes.net',
+    // credentials: true
   },
   proxy: {
+    // '/api': {
+    //   target: 'http://localhost:80/',
+    //   // target: 'https://reversi.nitncfes.net/',
+    //   pathRewrite: {
+    //     '^/api': '/'
+    //   }
+    // }
   },
   env: {
     API

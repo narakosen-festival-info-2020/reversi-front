@@ -31,8 +31,8 @@ $tablehw:60vmin;
 $tablehw-tab:70vmin;
 $tablehw-sp:90vmin;
 
-$bg-color:rgb(189, 126, 55);
-$hf-color:skyblue;
+$bg-color: #ffa3a3;
+$hf-color: #7fffff;
 
 .center{
   display: flex;
@@ -66,7 +66,7 @@ $hf-color:skyblue;
   backface-visibility: hidden;
   will-change: transform;
   overflow:hidden;
-  background-color: #ee7800;
+  background-color: #ff972f;
   background-image:
     repeating-linear-gradient(
     -45deg,
