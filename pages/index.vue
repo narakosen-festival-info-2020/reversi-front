@@ -30,7 +30,9 @@ export default {
     }
   },
   mounted () {
-    if (this.$device.isMobileOrTablet) {
+    const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+
+    if (window.navigator.userAgent.search(regexp) !== -1) {
       this.isMorT = true
     }
   },
