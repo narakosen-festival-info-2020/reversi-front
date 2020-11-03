@@ -23,6 +23,7 @@
   }
 
   html, body, #__nuxt, #__layout, #__layout > div{
+    overflow: hidden;
     height: 100%;
   }
 

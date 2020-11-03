@@ -40,6 +40,8 @@ export default {
         }).then((res) => {
           self.boardData = res.board
           this.reversi = new Reversi(self.boardData)
+          // eslint-disable-next-line no-console
+          console.log('generate done')
           // add class
           self.boardClass = 'table-size-' + res.board.length + '-' + res.board[0].length
         }).catch((e) => {
