@@ -27,8 +27,15 @@ export default {
     ]
   },
 
+  metaInfo: {
+    htmlAttrs: {
+      lang: 'ja'
+    }
+  },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+
   ],
   styleResources: {
     scss: ['~/assets/css/global.scss']
@@ -60,8 +67,18 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
+    // prefix: '/api'
+    // baseURL: 'https://reversi-back.nitncfes.net',
+    // credentials: true
   },
   proxy: {
+    // '/api': {
+    //   target: 'http://localhost:80/',
+    //   // target: 'https://reversi.nitncfes.net/',
+    //   pathRewrite: {
+    //     '^/api': '/'
+    //   }
+    // }
   },
   env: {
     API

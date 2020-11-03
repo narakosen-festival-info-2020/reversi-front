@@ -78,6 +78,8 @@ export default {
 <style lang="scss" scoped>
   .status-text {
     @extend %center-text;
+    font-family: 'M+ C Type-1 (basic latin) Bold',
+        'M+ Type-1 (general-j) Bold';
     font-size: x-large;
     text-align: center;
     background-color: $bg-color;

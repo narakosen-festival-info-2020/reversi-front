@@ -64,6 +64,8 @@ export default {
 <style lang="scss" scoped>
   .info-text {
     @extend %center-text;
+    font-family: 'M+ C Type-1 (basic latin) Bold',
+        'M+ Type-1 (general-j) Bold';
     font-size: x-large;
     position: absolute;
     text-align: center;

@@ -15,11 +15,12 @@
   }
 
   .title {
+    font-family: 'M+ MN Type-1 (basic latin) Bold';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    font-size: 20px;
+    font-size: 2rem;
   }
 
 </style>
