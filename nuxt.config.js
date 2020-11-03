@@ -18,11 +18,11 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'http://mplus-fonts.sourceforge.jp/webfonts/basic_latin/mplus_webfonts.css'
+        href: 'https://mplus-fonts.sourceforge.jp/webfonts/basic_latin/mplus_webfonts.css'
       },
       {
         rel: 'stylesheet',
-        href: 'http://mplus-fonts.sourceforge.jp/webfonts/general-j/mplus_webfonts.css'
+        href: 'https://mplus-fonts.sourceforge.jp/webfonts/general-j/mplus_webfonts.css'
       }
     ]
   },
