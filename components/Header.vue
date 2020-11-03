@@ -15,7 +15,7 @@
   }
 
   .title {
-    font-family: 'M+ MN Type-1 (basic latin) Bold';
+    font-family: "Nico Moji";
     position: absolute;
     top: 50%;
     left: 50%;

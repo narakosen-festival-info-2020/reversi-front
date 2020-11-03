@@ -8,7 +8,7 @@
 
 <style lang='scss' scoped>
   .footer {
-    font-family: 'M+ Type-1 (general-j) Light';
+    font-family: "M PLUS Rounded 1c";
     width: 100%;
     height: 10%;
     position: absolute;
