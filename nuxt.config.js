@@ -107,5 +107,9 @@ export default {
     orientation: 'any',
     background_color: '#fff',
     theme_color: '#fff'
+  },
+
+  generate: {
+    fallback: true
   }
 }
